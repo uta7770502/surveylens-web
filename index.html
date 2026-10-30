@@ -161,6 +161,8 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
   }
   .sampleLink{white-space:nowrap}
 }
+@media print{ @page{size:A4 portrait;margin:12mm} body{background:white!important} .sidebar,.topbar,.hero,#uploadPanel,#questionPanel,.sampleHead,.reportActions,.workspace>section:last-child{display:none!important} .app{display:block!important}.main{width:100%!important}.workspace{padding:0!important}.resultPanel{display:block!important;box-shadow:none!important;border:0!important;padding:0!important}.resultTop{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important}.resultCard{break-inside:avoid!important;box-shadow:none!important}.resultCard:last-child{grid-column:1/-1}.aiNotice{break-inside:avoid!important} #resultPanel:before{content:"SurveyLens | AI PERSONA INSIGHT REPORT";display:block;font-weight:700;font-size:18px;margin-bottom:10px} #resultPanel:after{content:"AIペルソナによる仮想評価です。実消費者調査ではありません。数値はUIデモ用で予測精度未検証。";display:block;font-size:10px;color:#777;margin-top:10px} }
+.reportActions{display:flex;justify-content:flex-end;margin-top:14px}.reportActions .nextBtn{margin:0;max-width:340px} @media(max-width:600px){.reportActions .nextBtn{max-width:none;width:100%}}
 </style>
 </head>
 <body>
@@ -221,7 +223,7 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
           <div class="step" id="step3"><span class="num">3</span>結果を確認</div>
         </div>
       </div>
-      <div class="uploadGrid">
+      <div class="field" style="margin:0 0 16px"><label for="targetType">アンケート対象</label><select id="targetType"><option value="product">商品・パッケージ</option><option value="design">ロゴ・広告・デザイン</option><option value="app">アプリ・Webサービス</option><option value="idea">企画・新規事業</option></select><p style="font-size:12px;color:#718096">アプリの場合は画面画像・説明文・公開URLなどを登録してください。URLの自動操作検証は行いません。</p></div><div class="uploadGrid">
         <div class="uploadCard active" data-mode="image"><span class="check">✓</span><div class="uploadIcon">▧</div><b>画像をアップロード</b><span>商品写真・パッケージ・デザイン<br>などの画像を登録</span></div>
         <div class="uploadCard" data-mode="text"><span class="check">✓</span><div class="uploadIcon">▤</div><b>テキストを入力</b><span>商品説明・コンセプト・<br>企画内容などを入力</span></div>
         <div class="uploadCard" data-mode="file"><span class="check">✓</span><div class="uploadIcon">♧</div><b>ファイルをアップロード</b><span>企画書・仕様書・資料など<br>（PDF・PPT・Word）</span></div>
@@ -277,6 +279,7 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
           </div>
         </div>
       </div>
+      <div class="reportActions"><button type="button" id="printReport" class="nextBtn">A4・1枚の会議用レポートをPDF保存</button></div><div id="evidencePanel" class="aiNotice"><b>検証状況：</b>予測精度は未検証。現在表示中の割合はデモ用であり、実測データに基づく予測ではありません。</div>
       <div class="aiNotice"><b>重要：</b>68%などの数値はUI確認用の仮数値です。実装時は、AI予測値・信頼度・根拠となる調査データ・実測値を別ラベルで表示します。</div>
     </section>
 
@@ -322,6 +325,11 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
 </main>
 </div>
 <script>
+const typeSelect=document.querySelector("#targetType");
+const surveyQuestion=document.querySelector("#question");
+const choiceInput=document.querySelector("#choices");
+typeSelect.addEventListener("change",()=>{const t=typeSelect.value;const q={product:"この商品を購入したいと思いますか？",design:"このデザインに魅力を感じますか？",app:"このアプリ・サービスを利用したいと思いますか？",idea:"この企画に魅力を感じますか？"};surveyQuestion.value=q[t];choiceInput.value=t==="app"?"ぜひ利用したい,やや利用したい,どちらともいえない,あまり利用したくない,利用したくない":t==="product"?"とても購入したい,やや購入したい,どちらともいえない,あまり購入したくない,購入したくない":"とても魅力を感じる,やや魅力を感じる,どちらともいえない,あまり魅力を感じない,魅力を感じない";});
+document.querySelector("#printReport").addEventListener("click",()=>window.print());
 const menuToggle=document.querySelector("#menuToggle");
 const mainNav=document.querySelector("#mainNav");
 if(menuToggle&&mainNav){

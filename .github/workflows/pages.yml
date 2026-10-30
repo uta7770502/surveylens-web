@@ -35,3 +35,5 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+# retrigger after GitHub Pages source enabled

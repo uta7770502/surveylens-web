@@ -15,7 +15,7 @@
 button,input,textarea,select{font:inherit}
 .app{display:grid;grid-template-columns:292px 1fr;min-height:100vh}
 .sidebar{background:rgba(255,255,255,.88);border-right:1px solid var(--line);padding:28px 22px 26px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;backdrop-filter:blur(12px)}
-.brand{font-size:34px;font-weight:500;letter-spacing:-1.4px}.tagline{font-size:12px;color:#95a0ae;letter-spacing:.12em;margin-top:5px}
+.brand{font-size:34px;font-weight:500;letter-spacing:-1.4px}.tagline{font-size:12px;color:#95a0ae;letter-spacing:.12em;margin-top:5px}.mobileBrandRow{display:block}.menuToggle{display:none}
 .nav{display:grid;gap:7px;margin-top:32px}.nav button{border:0;background:transparent;border-radius:11px;padding:14px 16px;text-align:left;color:#314156;display:flex;gap:13px;align-items:center;cursor:pointer;font-weight:650}.nav button.active{background:#e8f3ff;color:#1687ef}.nav .ico{width:24px;text-align:center;font-size:19px}
 .sideStats{margin-top:auto;background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:17px 18px}.sideStats small{color:#8b98a8}.sideStats b{display:block;font-size:24px;margin:4px 0}.bars{height:40px;display:flex;align-items:flex-end;gap:5px;justify-content:flex-end}.bars i{width:6px;border-radius:4px 4px 0 0;background:#8cc5fb;display:block}
 .help{padding:20px 8px 0;color:#617187;font-size:14px}
@@ -42,14 +42,25 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
   .app{display:block;min-height:auto}
   .sidebar{
     position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);
-    padding:18px 16px 14px;background:#fff
+    padding:18px 16px 14px;background:#fff;z-index:20
   }
+  .mobileBrandRow{display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand{font-size:30px;line-height:1.1}
   .tagline{font-size:11px;margin-top:4px}
-  .nav{
-    grid-template-columns:1fr 1fr;
-    gap:8px;margin-top:18px
+  .menuToggle{
+    display:flex;width:46px;height:46px;border:1px solid #dfe6ee;border-radius:13px;
+    background:#fff;align-items:center;justify-content:center;flex-direction:column;gap:5px;
+    box-shadow:0 4px 14px rgba(45,73,111,.06)
   }
+  .menuToggle span{display:block;width:20px;height:2px;background:#24364d;border-radius:2px;transition:.2s}
+  .menuToggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menuToggle.open span:nth-child(2){opacity:0}
+  .menuToggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .nav{
+    display:none;grid-template-columns:1fr 1fr;
+    gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)
+  }
+  .nav.open{display:grid}
   .nav button{
     padding:12px 12px;border:1px solid transparent;
     font-size:14px;min-height:48px;justify-content:flex-start
@@ -61,13 +72,18 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
   .main{width:100%}
   .topbar{display:none}
   .hero{
-    min-height:auto;padding:34px 18px 26px;
-    background:
-      linear-gradient(180deg,#f8fbff 0%,#ffffff 100%);
+    min-height:auto;padding:18px 16px 28px;
+    background:linear-gradient(180deg,#f8fbff 0%,#ffffff 100%);
+    display:flex;flex-direction:column
   }
-  .heroText{max-width:none}
+  .heroArt{
+    order:1;display:block;position:relative;right:auto;top:auto;bottom:auto;
+    width:100%;height:auto;aspect-ratio:606/410;margin:0 0 22px;border-radius:18px;
+    background-size:cover;background-position:center;box-shadow:0 8px 24px rgba(45,73,111,.08)
+  }
+  .heroText{order:2;max-width:none}
   .hero h1{
-    font-size:34px;line-height:1.35;letter-spacing:-.02em;
+    font-size:31px;line-height:1.34;letter-spacing:-.02em;
     margin:0 0 16px;word-break:normal;overflow-wrap:anywhere
   }
   .hero p{
@@ -84,7 +100,7 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
   }
   .roundIcon{width:38px;height:38px;font-size:18px;flex:0 0 auto}
   .metaText{font-size:12px}
-  .handCopy{display:none}.heroArt{display:block;position:relative;right:auto;top:auto;bottom:auto;width:100%;height:auto;aspect-ratio:606/410;margin:22px 0 0;border-radius:18px;background-size:cover;background-position:center;box-shadow:0 8px 24px rgba(45,73,111,.08)}
+  .handCopy{display:none}
   .workspace{
     padding:14px 12px 32px;margin-top:0
   }
@@ -150,9 +166,16 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
 <body>
 <div class="app">
 <aside class="sidebar">
-  <div class="brand">SurveyLens</div>
-  <div class="tagline">多くの声から、次の答えを。</div>
-  <nav class="nav">
+  <div class="mobileBrandRow">
+    <div>
+      <div class="brand">SurveyLens</div>
+      <div class="tagline">多くの声から、次の答えを。</div>
+    </div>
+    <button class="menuToggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav" id="mainNav">
     <button class="active"><span class="ico">⌂</span>ホーム</button>
     <button id="navNew"><span class="ico">▧</span>新しいアンケート</button>
     <button><span class="ico">↶</span>過去の結果</button>
@@ -299,6 +322,15 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
 </main>
 </div>
 <script>
+const menuToggle=document.querySelector("#menuToggle");
+const mainNav=document.querySelector("#mainNav");
+if(menuToggle&&mainNav){
+  menuToggle.onclick=()=>{
+    const open=mainNav.classList.toggle("open");
+    menuToggle.classList.toggle("open",open);
+    menuToggle.setAttribute("aria-expanded",String(open));
+  };
+}
 let mode="image";
 const cards=[...document.querySelectorAll(".uploadCard")];
 const imageFile=document.querySelector("#imageFile"),docFile=document.querySelector("#docFile");

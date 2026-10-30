@@ -38,7 +38,115 @@ radial-gradient(circle at 80% 18%,#fff 0,#f6f1e8 46%,#edf2f5 100%)}
 .aiNotice{margin-top:14px;padding:12px 14px;border-radius:10px;background:#fff8e9;border:1px solid #f0dfb8;color:#7b5f24;font-size:12px;line-height:1.55}
 .sampleHead{display:flex;justify-content:space-between;align-items:center}.sampleLink{color:#1687ef;font-size:12px;cursor:pointer}
 @media(max-width:1050px){.app{grid-template-columns:225px 1fr}.heroArt{opacity:.45;right:-70px}.heroText{max-width:560px}.uploadGrid{grid-template-columns:1fr 1fr}.resultTop{grid-template-columns:1fr}.sidebar{padding-left:14px;padding-right:14px}}
-@media(max-width:760px){.app{display:block}.sidebar{position:static;height:auto;border-right:0;padding:18px}.nav{grid-template-columns:1fr 1fr;margin-top:18px}.sideStats,.help{display:none}.topbar{display:none}.hero{padding:28px 20px;min-height:auto}.hero h1{font-size:31px}.heroArt{display:none}.workspace{padding:0 12px 36px}.panel{padding:17px}.panelHead{display:block}.stepper{margin-top:12px;gap:8px;flex-wrap:wrap}.uploadGrid,.questionGrid{grid-template-columns:1fr}.nextBtn{min-width:0;width:100%}.resultTop{grid-template-columns:1fr}}
+@media(max-width:760px){
+  html,body{width:100%;overflow-x:hidden}
+  body{background:#f7f9fc}
+  .app{display:block;min-height:auto}
+  .sidebar{
+    position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);
+    padding:18px 16px 14px;background:#fff
+  }
+  .brand{font-size:30px;line-height:1.1}
+  .tagline{font-size:11px;margin-top:4px}
+  .nav{
+    grid-template-columns:1fr 1fr;
+    gap:8px;margin-top:18px
+  }
+  .nav button{
+    padding:12px 12px;border:1px solid transparent;
+    font-size:14px;min-height:48px;justify-content:flex-start
+  }
+  .nav button.active{border-color:#d8eaff;background:#eaf4ff}
+  .nav .ico{width:22px;font-size:17px}
+  .sideStats{display:none}
+  .help{display:none}
+  .main{width:100%}
+  .topbar{display:none}
+  .hero{
+    min-height:auto;padding:34px 18px 26px;
+    background:
+      linear-gradient(180deg,#f8fbff 0%,#ffffff 100%);
+  }
+  .heroText{max-width:none}
+  .hero h1{
+    font-size:34px;line-height:1.35;letter-spacing:-.02em;
+    margin:0 0 16px;word-break:keep-all
+  }
+  .hero p{
+    font-size:14px;line-height:1.8;
+    word-break:normal
+  }
+  .heroMeta{
+    display:grid;grid-template-columns:1fr;
+    gap:12px;margin-top:22px
+  }
+  .heroMeta .item{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:12px 14px
+  }
+  .roundIcon{width:38px;height:38px;font-size:18px;flex:0 0 auto}
+  .metaText{font-size:12px}
+  .heroArt,.handCopy{display:none}
+  .workspace{
+    padding:14px 12px 32px;margin-top:0
+  }
+  .panel{
+    border-radius:16px;padding:16px 14px;margin-bottom:14px;
+    box-shadow:0 8px 24px rgba(45,73,111,.06)
+  }
+  .panelHead{display:block;margin-bottom:14px}
+  .panel h2{font-size:18px;line-height:1.45}
+  .stepper{
+    margin-top:12px;gap:6px;flex-wrap:wrap;font-size:11px
+  }
+  .num{width:22px;height:22px}
+  .uploadGrid{
+    grid-template-columns:1fr;
+    gap:10px
+  }
+  .uploadCard{
+    min-height:0;padding:16px 14px;
+    text-align:left;display:grid;grid-template-columns:42px 1fr;
+    align-items:center;justify-content:initial
+  }
+  .uploadCard .check{
+    right:10px;top:10px;width:20px;height:20px
+  }
+  .uploadIcon{
+    font-size:28px;margin:0;grid-row:1 / span 2
+  }
+  .uploadCard b{font-size:14px}
+  .uploadCard span{font-size:11px;line-height:1.45;margin-top:3px}
+  .previewWrap.show{
+    display:grid;grid-template-columns:72px 1fr
+  }
+  .previewWrap img{width:72px;height:72px}
+  .textInput textarea{min-height:110px}
+  .nextBtn{
+    min-width:0;width:100%;margin-top:14px;padding:14px 18px
+  }
+  .questionGrid{grid-template-columns:1fr;gap:12px}
+  .wide{grid-column:auto}
+  .field textarea{min-height:110px}
+  .resultTop{grid-template-columns:1fr;gap:12px}
+  .resultCard{
+    min-height:0;padding:15px
+  }
+  .donutWrap{
+    flex-direction:column;align-items:flex-start
+  }
+  .donut{width:118px;height:118px;margin:0 auto}
+  .legend{width:100%;gap:8px}
+  .barsList .r{
+    grid-template-columns:52px 1fr 34px;
+    font-size:11px
+  }
+  .comments{gap:10px}
+  .sampleHead{
+    align-items:flex-start;gap:10px
+  }
+  .sampleLink{white-space:nowrap}
+}
 </style>
 </head>
 <body>

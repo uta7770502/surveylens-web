@@ -1,0 +1,15 @@
+{
+  "captured_at": "2026-10-30T03:01:55Z",
+  "respondent_records_processed": 629549,
+  "core_microdata_records": 60987,
+  "pisa_records": 519334,
+  "piaac_records": 49228,
+  "pisa_years": [
+    2015
+  ],
+  "pisa_countries": 73,
+  "piaac_countries": 8,
+  "estat_aggregate_rows": 26,
+  "training_eligible_records": 0,
+  "note": "Aggregate rows are excluded from respondent totals. Training eligibility remains blocked pending license, dictionary, comparability, and weight validation."
+}

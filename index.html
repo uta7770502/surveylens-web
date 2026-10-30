@@ -330,6 +330,8 @@ const surveyQuestion=document.querySelector("#question");
 const choiceInput=document.querySelector("#choices");
 typeSelect.addEventListener("change",()=>{const t=typeSelect.value;const q={product:"この商品を購入したいと思いますか？",design:"このデザインに魅力を感じますか？",app:"このアプリ・サービスを利用したいと思いますか？",idea:"この企画に魅力を感じますか？"};surveyQuestion.value=q[t];choiceInput.value=t==="app"?"ぜひ利用したい,やや利用したい,どちらともいえない,あまり利用したくない,利用したくない":t==="product"?"とても購入したい,やや購入したい,どちらともいえない,あまり購入したくない,購入したくない":"とても魅力を感じる,やや魅力を感じる,どちらともいえない,あまり魅力を感じない,魅力を感じない";});
 document.querySelector("#printReport").addEventListener("click",()=>window.print());
+const reportButton=document.querySelector("#printReport");
+if(reportButton){reportButton.setAttribute("title","現在はUIデモ用の仮数値を含みます");}
 const menuToggle=document.querySelector("#menuToggle");
 const mainNav=document.querySelector("#mainNav");
 if(menuToggle&&mainNav){
@@ -361,6 +363,9 @@ async function loadStatus(){
  try{
   const r=await fetch("./data/status.json",{cache:"no-store"});if(!r.ok)return;const d=await r.json();
   const total=Number(d.respondent_records_processed||0);
+  const eligible=Number(d.training_eligible_records||0);
+  const evidence=document.querySelector("#evidencePanel");
+  if(evidence){evidence.textContent="データ監査：収集記録 "+total.toLocaleString("ja-JP")+" 件／学習適格確認 "+eligible.toLocaleString("ja-JP")+" 件。実測との予測精度比較は未完了。画面内の割合はデモ用の仮数値です。";}
   document.querySelector("#sideTotal").innerHTML=total.toLocaleString("ja-JP")+' <small>件</small>';
   document.querySelector("#heroTotal").textContent=(total/10000).toFixed(1)+'万件以上の';
  }catch(e){}
